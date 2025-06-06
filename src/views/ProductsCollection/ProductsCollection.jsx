@@ -110,6 +110,12 @@ const SearchBar = ({ changeSearch, loading, onSuccess, editRecord, onEditRecordC
 
     const handleOk = () => {
         modalForm.validateFields().then(values => {
+            // 检查PID数量是否满足要求
+            if (pidList.length < 10) {
+                message.error('PIDs数量必须大于等于10个！')
+                return
+            }
+
             const params = {
                 sectionName: values.pageName,
                 sectionType: values.position ? 1 : 2,
@@ -366,9 +372,9 @@ const SearchBar = ({ changeSearch, loading, onSuccess, editRecord, onEditRecordC
                         </div>
                     </Form.Item>
 
-                    <Form.Item name='url' label='URL' rules={[{ required: false }]}>
-                        <Input placeholder='Enter URL' />
-                    </Form.Item>
+                    {/* <Form.Item name='url' label='URL' rules={[{ required: false }]}>
+            <Input placeholder='Enter URL' />
+          </Form.Item> */}
                 </Form>
             </Modal>
         </>
@@ -431,13 +437,13 @@ const ProductsCollection = () => {
         },
         {
             title: 'URL',
-            dataIndex: 'url',
-            key: 'url',
+            dataIndex: 'id',
+            key: 'id',
             align: 'center',
-            render: text =>
-                text ? (
-                    <a href={text} target='_blank' rel='noopener noreferrer'>
-                        {text}
+            render: (text, record) =>
+                record.sectionType === 2 && text ? (
+                    <a href={`https://anystarr.com/hotsale/${text}`} target='_blank' rel='noopener noreferrer'>
+                        {`https://anystarr.com/hotsale/${text}`}
                     </a>
                 ) : (
                     '-'
