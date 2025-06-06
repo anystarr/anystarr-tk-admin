@@ -454,14 +454,40 @@ const ProductsCollection = () => {
             dataIndex: 'createTime',
             key: 'createTime',
             align: 'center',
-            render: text => text || '-'
+            render: text => {
+                if (!text) return '-'
+                const date = new Date(text)
+                return date.toLocaleString('zh-CN', {
+                    timeZone: 'Asia/Shanghai',
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit',
+                    hour12: false
+                })
+            }
         },
         {
             title: 'Last Updated',
             dataIndex: 'updateTime',
             key: 'updateTime',
             align: 'center',
-            render: text => text || '-'
+            render: text => {
+                if (!text) return '-'
+                const date = new Date(text)
+                return date.toLocaleString('zh-CN', {
+                    timeZone: 'Asia/Shanghai',
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit',
+                    hour12: false
+                })
+            }
         },
         {
             title: 'Action',
