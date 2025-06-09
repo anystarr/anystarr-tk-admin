@@ -111,7 +111,8 @@ const SearchBar = ({ changeSearch, loading, onSuccess, editRecord, onEditRecordC
     const handleOk = () => {
         modalForm.validateFields().then(values => {
             // 只在sectionType===1时检查PID数量
-            if (values.position === 1 && pidList.length < 10) {
+            console.log('~conso', values.position === 1)
+            if (values.position && pidList.length < 10) {
                 message.error('PIDs数量必须大于等于10个！')
                 return
             }
