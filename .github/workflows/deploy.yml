@@ -1,6 +1,7 @@
 name: CI & CD (build → push build dir → remote git pull)
 
 on:
+  workflow_dispatch:
   push:
     branches: [master]      # 监听 master 分支
     paths-ignore:
